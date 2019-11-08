@@ -137,7 +137,7 @@ module RSpec
         def unwrapped_job_options(jobs)
           jobs = jobs.values if jobs.is_a?(Hash)
           jobs.flatten.map do |job|
-            { 'at' => job['at'] }
+            job['at'].present? ? { 'at' => Time.at(job['at']).utc } : {}
           end
         end
 
